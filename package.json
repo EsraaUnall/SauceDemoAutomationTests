@@ -11,5 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "cypress": "^13.13.3"
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "step_definitions": "cypress/e2e/tests/",
+    "nonGlobalStepDefinitions": false
   }
 }
