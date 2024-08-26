@@ -1,4 +1,7 @@
 import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { PageObjects } from "../../page-objects/page-objects";
+
+const pageObjects = new PageObjects();
 
 Given("the user is logged in and on the products page", () => {
   cy.login("standard_user", "secret_sauce");
@@ -6,7 +9,5 @@ Given("the user is logged in and on the products page", () => {
 });
 
 Then("the prices of all products should be displayed correctly", () => {
-  cy.get(".inventory_item_price").each(($price) => {
-    expect($price.text()).to.match(/^\$\d+(\.\d{2})?$/); // Matches price format $x.xx
-  });
+  pageObjects.verifyPricesFormat();
 });

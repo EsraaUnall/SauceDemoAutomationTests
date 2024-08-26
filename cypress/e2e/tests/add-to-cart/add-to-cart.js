@@ -1,4 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { PageObjects } from "../../page-objects/page-objects";
+
+const pageObjects = new PageObjects();
 
 Given("the user is logged in and on the products page", () => {
   cy.login("standard_user", "secret_sauce");
@@ -6,13 +9,10 @@ Given("the user is logged in and on the products page", () => {
 });
 
 When("the user adds {string} to the cart", (productName) => {
-  cy.get(`div.inventory_item_name:contains("${productName}")`)
-  .parents('div.inventory_item_description')
-  .find('button')
-  .click();
+  pageObjects.addOrRemoveTheProductToCart(productName);
 });
 
 Then("the cart badge should show {string}", (count) => {
-  cy.get('#shopping_cart_container').click(); 
+  pageObjects.clickTheShoppingCart();
   cy.get(".shopping_cart_badge").should("contain.text", count);
 });

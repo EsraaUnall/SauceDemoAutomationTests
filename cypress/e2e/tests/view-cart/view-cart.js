@@ -1,16 +1,15 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { PageObjects } from "../../page-objects/page-objects";
+
+const pageObjects = new PageObjects();
 
 Given("the user is logged in and has items in the cart", () => {
   cy.login("standard_user", "secret_sauce");
-  cy.get(`div.inventory_item_name:contains("Sauce Labs Backpack")`)
-  .parents('div.inventory_item_description')
-  .find('button')
-  .click();
-  cy.get('#shopping_cart_container').click();
+  pageObjects.addOrRemoveTheProductToCart("Sauce Labs Backpack");
 });
 
 When("the user navigates to the cart", () => {
-  cy.get(".shopping_cart_link").click();
+  pageObjects.clickTheShoppingCart();
 });
 
 Then("the cart should display the correct items", () => {
