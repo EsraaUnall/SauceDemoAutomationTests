@@ -13,7 +13,8 @@ Given("the user is logged in and has items in the cart", () => {
 });
 
 When("the user removes all items from the cart", () => {
-  pageObjects.removeAllItemsFromCart();
+  pageObjects.removeAllItemsFromCart("sauce-labs-backpack");
+  pageObjects.removeAllItemsFromCart("sauce-labs-bike-light");
 });
 
 Then("the cart badge should be empty", () => {

@@ -14,7 +14,9 @@
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.2"
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.2",
+    "allure-commandline": "^2.30.0",
+    "allure-cypress": "^3.0.0-beta.10"
   },
   "cypress-cucumber-preprocessor": {
     "step_definitions": "cypress/e2e/tests/",

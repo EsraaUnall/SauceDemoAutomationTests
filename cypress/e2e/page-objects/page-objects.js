@@ -42,8 +42,8 @@ export class PageObjects {
     return cy.get(".complete-header");
   }
 
-  getCartItems() {
-    return cy.get(".cart_item");
+  getCartItems(name) {
+    return cy.get(`[data-test="remove-${name}"]`)
   }
 
   getMenuButton() {
@@ -126,10 +126,8 @@ export class PageObjects {
     return this;
   }
 
-  removeAllItemsFromCart() {
-    this.getCartItems().each((item) => {
-      cy.wrap(item).find(".cart_button").click();
-    });
+  removeAllItemsFromCart(name) {
+    this.getCartItems(name).click();  
     return this;
   }
 
