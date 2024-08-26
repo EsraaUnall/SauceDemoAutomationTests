@@ -1,13 +1,13 @@
 import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
-import { PageObjects } from "../../page-objects/page-objects";
+import { AssertionObjects } from "../../assertion-objects/assertion-objects";
 
-const pageObjects = new PageObjects();
+const assertionObjects = new AssertionObjects();
 
 Given("the user is logged in and on the products page", () => {
   cy.login("standard_user", "secret_sauce");
-  cy.url().should("include", "/inventory.html");
+  assertionObjects.verifyUrlContains("/inventory.html");
 });
 
 Then("the prices of all products should be displayed correctly", () => {
-  pageObjects.verifyPricesFormat();
+  assertionObjects.verifyPricesFormat();
 });

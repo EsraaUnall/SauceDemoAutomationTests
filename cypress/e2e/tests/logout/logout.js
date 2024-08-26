@@ -1,11 +1,13 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import { PageObjects } from "../../page-objects/page-objects";
+import { AssertionObjects } from "../../assertion-objects/assertion-objects";
 
 const pageObjects = new PageObjects();
+const assertionObject = new AssertionObjects();
 
 Given("the user is logged in", () => {
   cy.login("standard_user", "secret_sauce");
-  cy.url().should("include", "/inventory.html");
+  assertionObject.verifyUrlContains("/inventory.html");
 });
 
 When("the user clicks on the logout button", () => {
@@ -13,9 +15,9 @@ When("the user clicks on the logout button", () => {
 });
 
 Then("the user should be redirected to the login page", () => {
-  cy.url().should("include", "/");
+  assertionObject.verifyUrlContains("/");
 });
 
 Then("the user should see the login form", () => {
-  cy.get("#login-button").should("be.visible");
+  assertionObject.VerifyLoginPage();
 });

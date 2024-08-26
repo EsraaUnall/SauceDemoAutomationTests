@@ -1,7 +1,9 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import { PageObjects } from "../../page-objects/page-objects";
+import { AssertionObjects } from "../../assertion-objects/assertion-objects";
 
 const pageObjects = new PageObjects();
+const assertionObject = new AssertionObjects();
 
 Given("the user is logged in and on the products page", () => {
   cy.login("standard_user", "secret_sauce");
@@ -22,6 +24,5 @@ When("removes {string} from the cart", (product) => {
 
 Then("the cart should contain only {string}", (product) => {
   pageObjects.clickTheShoppingCart();
-  cy.get(".cart_item").should("contain.text", product);
-  cy.get(".cart_item").should("not.contain.text", "Sauce Labs Backpack"); 
+  assertionObject.verifyCartContainsProduct(product).verifyCartDoesNotContainProduct("Sauce Labs Backpack");
 });

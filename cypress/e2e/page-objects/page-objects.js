@@ -70,6 +70,22 @@ export class PageObjects {
     return cy.get(".inventory_item_price");
   }
 
+  getMainPageTitle() {
+    return cy.get(".title");
+  }
+
+  getErrorMessage() {
+    return cy.get(".error-message-container");
+  }
+
+  getUsernameField() {
+    return cy.get("#user-name");
+  }
+
+  getPasswordField() {
+    return cy.get("#password");
+  }
+
   addOrRemoveTheProductToCart(name) {
     this.getTheProductToCart(name).click();
     return this;
@@ -131,52 +147,20 @@ export class PageObjects {
   sortProductsBy(filterOption) {
     this.getSortContainer().select(filterOption);
     return this;
-  }
+  }  
 
-  verifyProductsSortedByNameAsc() {
-    this.getInventoryItemNames().then((items) => {
-      const names = [...items].map((item) => item.innerText);
-      const sortedNames = [...names].sort();
-      expect(names).to.deep.equal(sortedNames);
-    });
+  clickLoginButton() {
+    this.getLoginButton().click();
     return this;
   }
 
-  verifyProductsSortedByNameDesc() {
-    this.getInventoryItemNames().then((items) => {
-      const names = [...items].map((item) => item.innerText);
-      const sortedNames = [...names].sort((a, b) => b.localeCompare(a)); // Z to A
-      expect(names).to.deep.equal(sortedNames);
-    });
+  fillUsername(username) {
+    this.getUsernameField().type(username);
     return this;
   }
 
-  verifyProductsSortedByPriceAsc() {
-    this.getInventoryItemPrices().then((prices) => {
-      const priceValues = [...prices].map((price) =>
-        parseFloat(price.innerText.replace("$", ""))
-      );
-      const sortedPrices = [...priceValues].sort((a, b) => a - b);
-      expect(priceValues).to.deep.equal(sortedPrices);
-    });
-    return this;
-  }
-
-  verifyProductsSortedByPriceDesc() {
-    this.getInventoryItemPrices().then((prices) => {
-      const priceValues = [...prices].map((price) =>
-        parseFloat(price.innerText.replace("$", ""))
-      );
-      const sortedPrices = [...priceValues].sort((a, b) => b - a);
-      expect(priceValues).to.deep.equal(sortedPrices);
-    });
-    return this;
-  }
-
-  verifyPricesFormat() {
-    this.getInventoryItemPrices().each(($price) => {
-      expect($price.text()).to.match(/^\$\d+(\.\d{2})?$/);
-    });
+  fillPassword(password) {
+    this.getPasswordField().type(password);
     return this;
   }
 }
